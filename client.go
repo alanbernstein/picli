@@ -1,61 +1,29 @@
-package main
+package pilosago
 
 import (
+	"encoding/json"
+	"errors"
 	"fmt"
+	"github.com/umbel/pilosa/pql"
 	"io/ioutil"
 	"net/http"
-	"errors"
 	"net/url"
-	"encoding/json"
 	"os"
-	"time"
 	"strings"
-	"github.com/umbel/pilosa/pql"
-
-//	"helpers"
+	"time"
+	//	"helpers"
 )
 
-
 // TODO: use go test
-func test_client_schema(c *Client) {
-	fmt.Printf("\nschema test\n")
 
-	DBs, err := c.Schema()
-	if err != nil {
-		fmt.Printf("%s\n", err)
-		os.Exit(1)
-	}
-
-	fmt.Printf("database[0] name: %s\n", DBs[0].Name)
-	fmt.Printf("frame[0] name: %s\n", DBs[0].Frames[0].Name)
-}
-
-
-func test_client_union(c *Client) {
-	fmt.Printf("\nunion test\n")
-
-	call := Union(Bitmap(20, "bar"), Bitmap(21, "bar"))
-
-	result, err := c.Execute("ExampleDB", pql.Calls{call})
-	if err != nil {
-		fmt.Printf("%s\n", err)
-		os.Exit(1)
-	}
-
-	fmt.Printf("query: %s\n", call)
-	fmt.Printf("result: %s\n", result)
-}
-
-func main() {
-	c, err := NewClient(default_host)
-	if err != nil {
-		panic(err)
-	}
-
-	test_client_schema(c)
-	test_client_union(c)
-
-}
+// func main() {
+// 	c, err := NewClient(default_host)
+// 	if err != nil {
+// 		panic(err)
+// 	}
+// 	test_client_schema(c)
+// 	test_client_union(c)
+// }
 
 var default_host = "127.0.0.1:15000"
 
@@ -111,7 +79,7 @@ func NewClient(host string) (*Client, error) {
 	// TODO use default database
 	if host == "" {
 		//return nil, ErrHostRequired
-		host = default_host  // TODO: I prefer a useful default...
+		host = default_host // TODO: I prefer a useful default...
 	}
 
 	return &Client{
@@ -154,10 +122,10 @@ func (c *Client) Execute(database string, calls pql.Calls) (string, error) {
 
 	u := url.URL{
 		Scheme: "http",
-		Host: c.host,
-		Path: "/query",
+		Host:   c.host,
+		Path:   "/query",
 		RawQuery: url.Values{
-			"db":    {database},
+			"db": {database},
 		}.Encode(),
 	}
 
@@ -182,8 +150,8 @@ func (c *Client) Execute(database string, calls pql.Calls) (string, error) {
 // convenience wrappers around pql types
 func ClearBit(id uint64, frame string, profileID uint64) *pql.ClearBit {
 	return &pql.ClearBit{
-		ID: id,
-		Frame: frame,
+		ID:        id,
+		Frame:     frame,
 		ProfileID: profileID,
 	}
 }
@@ -202,15 +170,15 @@ func Profile(id uint64) *pql.Profile {
 
 func SetBit(id uint64, frame string, profileID uint64) *pql.SetBit {
 	return &pql.SetBit{
-		ID: id,
-		Frame: frame,
+		ID:        id,
+		Frame:     frame,
 		ProfileID: profileID,
 	}
 }
 
 func SetBitmapAttrs(id uint64, frame string, attrs map[string]interface{}) *pql.SetBitmapAttrs {
 	return &pql.SetBitmapAttrs{
-		ID: id,
+		ID:    id,
 		Frame: frame,
 		Attrs: attrs,
 	}
@@ -218,19 +186,19 @@ func SetBitmapAttrs(id uint64, frame string, attrs map[string]interface{}) *pql.
 
 func SetProfileAttrs(id uint64, attrs map[string]interface{}) *pql.SetProfileAttrs {
 	return &pql.SetProfileAttrs{
-		ID: id,
+		ID:    id,
 		Attrs: attrs,
 	}
 }
 
 func TopN(frame string, n int, src pql.BitmapCall, bmids []uint64, field string, filters []interface{}) *pql.TopN {
 	return &pql.TopN{
-		Frame: frame,
-		N: n,
-		Src: src,
+		Frame:     frame,
+		N:         n,
+		Src:       src,
 		BitmapIDs: bmids,
-		Field: field,
-		Filters: filters,
+		Field:     field,
+		Filters:   filters,
 	}
 }
 
@@ -262,9 +230,9 @@ func Bitmap(id uint64, frame string) *pql.Bitmap {
 
 func Range(id uint64, frame string, start time.Time, end time.Time) *pql.Range {
 	return &pql.Range{
-		ID:    id,
-		Frame: frame,
+		ID:        id,
+		Frame:     frame,
 		StartTime: start,
-		EndTime: end,
+		EndTime:   end,
 	}
 }

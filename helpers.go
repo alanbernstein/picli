@@ -1,4 +1,5 @@
-package pilosa-go
+package pilosago
+
 // TODO: figure this out
 
 import (
@@ -8,8 +9,8 @@ import (
 // convenience wrappers around pql types
 func ClearBit(id uint64, frame string, profileID uint64) *pql.ClearBit {
 	return &pql.ClearBit{
-		ID: id,
-		Frame: frame,
+		ID:        id,
+		Frame:     frame,
 		ProfileID: profileID,
 	}
 }
@@ -28,15 +29,15 @@ func Profile(id uint64) *pql.Profile {
 
 func SetBit(id uint64, frame string, profileID uint64) *pql.SetBit {
 	return &pql.SetBit{
-		ID: id,
-		Frame: frame,
+		ID:        id,
+		Frame:     frame,
 		ProfileID: profileID,
 	}
 }
 
 func SetBitmapAttrs(id uint64, frame string, attrs map[string]interface{}) *pql.SetBitmapAttrs {
 	return &pql.SetBitmapAttrs{
-		ID: id,
+		ID:    id,
 		Frame: frame,
 		Attrs: attrs,
 	}
@@ -44,19 +45,19 @@ func SetBitmapAttrs(id uint64, frame string, attrs map[string]interface{}) *pql.
 
 func SetProfileAttrs(id uint64, attrs map[string]interface{}) *pql.SetProfileAttrs {
 	return &pql.SetProfileAttrs{
-		ID: id,
+		ID:    id,
 		Attrs: attrs,
 	}
 }
 
 func TopN(frame string, n int, src pql.BitmapCall, bmids []uint64, field string, filters []interface{}) *pql.TopN {
 	return &pql.TopN{
-		Frame: frame,
-		N: n,
-		Src: src,
+		Frame:     frame,
+		N:         n,
+		Src:       src,
 		BitmapIDs: bmids,
-		Field: field,
-		Filters: filters,
+		Field:     field,
+		Filters:   filters,
 	}
 }
 
@@ -88,9 +89,9 @@ func Bitmap(id uint64, frame string) *pql.Bitmap {
 
 func Range(id uint64, frame string, start time.Time, end time.Time) *pql.Range {
 	return &pql.Range{
-		ID:    id,
-		Frame: frame,
+		ID:        id,
+		Frame:     frame,
 		StartTime: start,
-		EndTime: end,
+		EndTime:   end,
 	}
 }
