@@ -102,6 +102,10 @@ func (c *Client) Execute(database string, calls pql.Calls) (string, error) {
 	// TODO protobuf stuff (see pilosa/client.go)
 	// TODO parse http response into QueryResponse, containing list of QueryResult
 
+	// TODO handle profiles argument (?) should that be a different function?
+	// if profiles:
+	// 	url += "&profiles=true"
+
 	if database == "" {
 		return "", ErrDatabaseRequired
 	}
