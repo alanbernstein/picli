@@ -1,9 +1,8 @@
 package pilosago
 
-// TODO: figure this out
-
 import (
 	"github.com/umbel/pilosa/pql"
+	"time"
 )
 
 // convenience wrappers around pql types

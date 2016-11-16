@@ -1,32 +1,32 @@
 package pilosago
 
+/*
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"net/http"
 	"os"
-	"io/ioutil"
 	"strings"
-	"encoding/json"
 )
+*/
 
+// var default_host = "127.0.0.1:15000"
 
+//type Client struct {
+//	host string
+//}
 
-var default_host = "127.0.0.1:15000"
+//type Query interface {
+//	pql string
+//}
 
-type Client struct {
-	host string
-}
-
-type Query interface {
-	pql string
-}
-
-type Result interface {
-
-}
-
+//type Result interface {
+//
+//}
 
 // (map[string]interface{})
+/*
 func (client *Client) send_query_string(db string, query string, profiles bool) ([]byte, error) {
 	url := fmt.Sprintf("http://%s/query?db=%s", client.host, db)
 	if profiles {
@@ -54,12 +54,12 @@ func (client *Client) send_query_string(db string, query string, profiles bool) 
 	return contents, nil
 }
 
-func (client *Client) SetBit(id int, frame string, profile_id int) (Query) {
+func (client *Client) SetBit(id int, frame string, profile_id int) Query {
 	pql := fmt.Sprintf("SetBit(id=%d, frame=\"%s\", profileID=%s", id, frame, profile_id)
 	return Query(pql)
 }
-
-
+*/
+/*
 func main() {
 
 	var client Client
@@ -84,3 +84,4 @@ func main() {
 	fmt.Println(objmap)
 
 }
+*/

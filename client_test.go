@@ -1,23 +1,16 @@
 package pilosago
 
 import (
-	"encoding/json"
-	"errors"
 	"fmt"
 	"github.com/umbel/pilosa/pql"
-	"io/ioutil"
-	"net/http"
-	"net/url"
 	"os"
-	"strings"
-	"time"
-	//	"helpers"
+	"testing"
 )
 
-func test_client_schema() {
+func TestClientSchema(t *testing.T) {
 	c, err := NewClient(default_host)
 	if err != nil {
-		panic(err)
+		t.Fatal(err)
 	}
 
 	fmt.Printf("\nschema test\n")
@@ -30,9 +23,19 @@ func test_client_schema() {
 
 	fmt.Printf("database[0] name: %s\n", DBs[0].Name)
 	fmt.Printf("frame[0] name: %s\n", DBs[0].Frames[0].Name)
+
+	/*
+		if a := f.Bitmap(0).Bits(); !reflect.DeepEqual(a, []uint64{1, 5}) {
+			t.Fatalf("unexpected bits: %+v", a)
+		}
+		if a := f.Bitmap(200).Bits(); !reflect.DeepEqual(a, []uint64{6}) {
+			t.Fatalf("unexpected bits: %+v", a)
+		}
+	*/
+
 }
 
-func test_client_union() {
+func TestClientUnion(t *testing.T) {
 	c, err := NewClient(default_host)
 	if err != nil {
 		panic(err)
