@@ -1,4 +1,4 @@
-package pilosago
+package picli
 
 import (
 	"github.com/umbel/pilosa/pql"

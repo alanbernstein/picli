@@ -1,4 +1,4 @@
-package pilosago
+package picli
 
 import (
 	"fmt"
